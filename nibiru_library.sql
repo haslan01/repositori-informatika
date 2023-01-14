@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Waktu pembuatan: 10 Des 2020 pada 09.59
--- Versi server: 10.4.13-MariaDB
--- Versi PHP: 7.4.8
+-- Host: 127.0.0.1
+-- Generation Time: Jan 14, 2023 at 12:11 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `buku`
+-- Table structure for table `buku`
 --
 
 CREATE TABLE `buku` (
@@ -43,35 +44,36 @@ CREATE TABLE `buku` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `buku`
+-- Dumping data for table `buku`
 --
 
 INSERT INTO `buku` (`no_buku`, `nama_buku`, `pengarang_buku`, `penerbit_buku`, `sampul_buku`, `kategori_buku`, `deskripsi_buku`, `status_buku`, `jumlah_dipinjam`, `love`, `buku-created_at`, `buku-updated_at`) VALUES
-('1000000001', 'Bahasa Indonesia Kelas XII', 'Maman Suryaman', 'Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud', '1607094403_0288a63b019a875acbec.jpg', 1, 'Buku ini dipersiapkan untuk mendukung kebijakan Kurikulum 2013 yang tidak sekadar secara konstitusional mempertahankan bahasa Indonesia dalam daftar mata pelajaran di sekolah. Namun, Kurikulum terbaru ini mempertegaskan pentingnya keberadaan bahasa Indonesia sebagai penghela dan pembawa ilmu pengetahuan.', 0, 0, 2, 'Monday, 07-12-2020, 11:21:41', 'Wednesday, 09-12-2020, 22:36:12'),
-('1000000002', 'Bahasa Inggris Kelas XII', 'Emi Emilia', 'Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud', '1607094792_248987c3e5c38fb72ded.jpg', 1, 'Buku ini dipersiapkan untuk membangun sikap, pengetahuan, dan keterampilan berkomunikasi siswa melalui pengalaman belajar yang berbentuk beragam kegiatan berkomunikasi aktif. Isi dan pengalaman yang telah dikembangkan dalam buku ini telah diupayakan agar dapat membantu siswa mencapaiempat kompetensi inti (KI) yang diamanahkan oleh Kurikulum 2013.', 0, 0, 2, 'Monday, 07-12-2020, 11:22:41', 'Wednesday, 09-12-2020, 22:40:23'),
-('1000000003', 'Pemrograman Dasar Kelas X', 'Andi Novianto', 'Erlangga', '1607229240_b896cdf73bdfe31cc8fa.jpg', 1, 'Buku ini diperuntukkan untuk pemebelajaran mengenai Pemrograman Dasar. Siswa akan mendapatkan teori dan implementasi penggunaan dan kegunaan dari Pemrograman. Diharapkan kedepannya siswa dapat memantapkan keahliannya untuk menuju jenjang yang lebih tinggi lagi.', 1, 5, 4, 'Monday, 07-12-2020, 11:23:41', 'Wednesday, 09-12-2020, 22:51:12'),
-('2000000001', 'Another Volume 1', 'Yukito Ayatsuji', 'Kadokawa Shoten', '1607187577_fffc57fd5dd888acd89b.jpeg', 2, 'Another dimulai dengan menceritakan seorang siswi berprestasi pada tahun 1972 di SMP Yomiyama Utara. Siswi yang sangat populer di kalangan guru-guru bahkan murid lainnya. Murid itu bernama Misaki dari kelas 3-3, tetapi ia meninggal secara tiba-tiba ketika pelajaran di sekolah tengah berlangsung. Hal itulah yang disayangkan oleh para murid dan guru di sana.', 0, 3, 9, 'Monday, 07-12-2020, 11:24:41', 'Wednesday, 09-12-2020, 23:04:31'),
-('2000000002', 'Another Volume 2', 'Yukito Ayatsuji', 'Kadokawa Shoten', '1607187711_9a8684dff0e2ca9d064e.jpeg', 2, 'Another dimulai dengan menceritakan seorang siswi berprestasi pada tahun 1972 di SMP Yomiyama Utara. Siswi yang sangat populer di kalangan guru-guru bahkan murid lainnya. Murid itu bernama Misaki dari kelas 3-3, tetapi ia meninggal secara tiba-tiba ketika pelajaran di sekolah tengah berlangsung. Hal itulah yang disayangkan oleh para murid dan guru di sana.', 0, 1, 4, 'Monday, 07-12-2020, 11:25:41', 'Wednesday, 09-12-2020, 22:46:13'),
-('2000000003', 'Yahari Ore no Seishun Love Comedy wa Machigatteiru Volume 12', 'Naomichi Io', 'Shogakukan', '1607188389_4916e255b41337220b93.jpg', 2, 'Bercerita tentang hachiman, sosok yang lebih memilih sendiri dari pada berbaur dengan lainnya. Suatu hari ketika disuruh menulis pandangan nya terhadap masa SMA dia dianggap aneh oleh guru nya.<br />\r\n<br />\r\nKemudian dia disuruh masuk ke klub relawan, sebuah klub yang siap membantu siapa saja murid yang memiliki masalah. disana dia bertemu dengan Yukinon, seorang siswi yang pintar, cantik namun memiliki sifat yang dingin.', 0, 0, 3, 'Monday, 07-12-2020, 11:26:41', 'Wednesday, 09-12-2020, 22:54:50'),
-('2000000004', 'Yahari Ore no Seishun Love Comedy wa Machigatteiru Volume 11', 'Naomichi Io', 'Shogakukan', '1607189113_332ef0c63756d4bf9bcb.jpg', 2, 'Bercerita tentang hachiman, sosok yang lebih memilih sendiri dari pada berbaur dengan lainnya. Suatu hari ketika disuruh menulis pandangan nya terhadap masa SMA dia dianggap aneh oleh guru nya.<br />\r\n<br />\r\nKemudian dia disuruh masuk ke klub relawan, sebuah klub yang siap membantu siapa saja murid yang memiliki masalah. disana dia bertemu dengan Yukinon, seorang siswi yang pintar, cantik namun memiliki sifat yang dingin.', 0, 0, 2, 'Monday, 07-12-2020, 11:27:41', 'Wednesday, 09-12-2020, 22:44:59'),
-('2000000005', 'Yahari Ore no Seishun Love Comedy wa Machigatteiru Volume 6', 'Naomichi Io', 'Shogakukan', '1607188605_d01025c627ffff2f9292.jpg', 2, 'Bercerita tentang hachiman, sosok yang lebih memilih sendiri dari pada berbaur dengan lainnya. Suatu hari ketika disuruh menulis pandangan nya terhadap masa SMA dia dianggap aneh oleh guru nya.<br />\r\n<br />\r\nKemudian dia disuruh masuk ke klub relawan, sebuah klub yang siap membantu siapa saja murid yang memiliki masalah. disana dia bertemu dengan Yukinon, seorang siswi yang pintar, cantik namun memiliki sifat yang dingin.', 0, 0, 3, 'Monday, 07-12-2020, 11:28:41', 'Wednesday, 09-12-2020, 22:53:03'),
-('2000000006', 'Sebuah Seni Untuk Bersikap Bodo Amat', 'Mark Manson', 'HarperOne', '1607188928_ca3afd3d386882e33e35.jpg', 2, 'Novel yang berjudul Sebuah Seni Untuk Bersikap Bodo Amat bercerita tentang seseorang yang bernama Charles Bukowski yang mempunyai masa lalu yang kelam, suka mabuk-mabukan, berjudi, mempermainkan wanita, kasar, tukang utang dan seorang penyair. Dia bercita-cita menjadi seorang penulis terkenal namun karya-karyanya selalu ditolak oleh hampir disetiap majalah, jurnal-jurnal, surat kabar dan penerbit lainnya.', 1, 2, 7, 'Monday, 07-12-2020, 11:29:41', 'Wednesday, 09-12-2020, 22:51:26'),
-('2000000007', 'Segala-Galanya Ambyar', 'Mark Manson', 'HarperOne', '1607189655_90b438667cbc40e2239b.jpg', 2, 'Novel yang berjudul Sebuah Seni Untuk Bersikap Bodo Amat bercerita tentang seseorang yang bernama Charles Bukowski yang mempunyai masa lalu yang kelam, suka mabuk-mabukan, berjudi, mempermainkan wanita, kasar, tukang utang dan seorang penyair. Dia bercita-cita menjadi seorang penulis terkenal namun karya-karyanya selalu ditolak oleh hampir disetiap majalah, jurnal-jurnal, surat kabar dan penerbit lainnya.', 0, 0, 1, 'Monday, 07-12-2020, 11:30:41', 'Wednesday, 09-12-2020, 22:42:09'),
-('3000000001', 'Black Clover Volume 20', 'Yuki Tabata', 'Shueisha', '1607187902_4e9a894fe9e7be895541.png', 3, 'Asta dan Yuno sejak kecil telah ditinggalkan oleh orang tua mereka di sebuah gereja pada saat yang sama, sejak saat itu hingga kini mereka telah di besarkan oleh pemilik gereja. Mereka berdua selalu saja bersaing untuk menentukan siapa yang lebih hebat. Walaupun begitu, kini mulai terlihat jauh kemampuan diantara keduanya.', 0, 0, 2, 'Monday, 07-12-2020, 11:31:41', 'Wednesday, 09-12-2020, 22:55:07'),
-('3000000002', 'Naruto Shippuden Volume 72', 'Masashi Kishimoto', 'Shonen Jump', '1607188805_45e71bf8c5d17792a089.jpg', 3, 'Komik ini menceritakan kisah lanjutan dari Naruto. Naruto kini telah beranjak dewasa begitu juga dengan teman – temannya. Naruto yang baru pulang dari latihannya bersama jiraiya pergi ketempat Tsunade dan bertemu dengan Sakura. Tsunade menyuruh mereka berdua untuk bertarung bersama Kakashi untuk mengukur seberapa jauh mereka berlatih dengan guru masing – masing.', 1, 1, 1, 'Monday, 07-12-2020, 11:32:41', 'Wednesday, 09-12-2020, 22:40:18'),
-('3000000003', 'Shingeki No Kyojin Volume 19', 'Hajime Isayama', 'Shonen Jump', '1607189326_db3d336a380bcfb60677.jpg', 3, 'Bercerita tentang hachiman, sosok yang lebih memilih sendiri dari pada berbaur dengan lainnya. Suatu hari ketika disuruh menulis pandangan nya terhadap masa SMA dia dianggap aneh oleh guru nya.<br />\r\n<br />\r\nKemudian dia disuruh masuk ke klub relawan, sebuah klub yang siap membantu siapa saja murid yang memiliki masalah. disana dia bertemu dengan Yukinon, seorang siswi yang pintar, cantik namun memiliki sifat yang dingin.', 0, 4, 3, 'Monday, 07-12-2020, 11:33:41', 'Wednesday, 09-12-2020, 23:04:28'),
-('3000000004', 'Yu-Gi-Oh 5DS Volume 4', 'Kazuki Takahashi', 'Shueisha', '1607229728_cc7a83232e9a2a97f025.jpg', 3, 'Yugioh 5d adalah seri baru setelah yugioh GX, pada zaman ini menceritakan dunia di masa depan dimana kota sebelumnya bernama Domino City menjadi Neo Domino City, di masa ini, begitu banyak teknologi yang sudah dikembangkan, salah satunya adalah Riding-Duel. Riding-duel adalah duel antara duelist dengan menggunakan motor berkecepatan tinggi. Ditambah lagi apabila orang ingin melakukan Riding Duel, mereka harus mengaktifkan kartu Spell Speed World.', 0, 0, 2, 'Monday, 07-12-2020, 11:34:41', 'Wednesday, 09-12-2020, 22:53:13'),
-('3000000005', 'Fate Stay Night Heavens Feel Volume 1', 'Kinoko Nasu', 'Type Moon', '1607230269_78131edbc051b2302980.jpg', 3, 'Perang Cawan Suci, sebuah peperangan antar tujuh orang master dan servant mereka untuk memperebutkan cawan suci, perangkat mahakuasa yang bisa mengabulkan berbagai macam harapan. Sepuluh tahun lalu, perang cawan suci keempat telah meluluhlantakan kota Fuyuki dan menelan 500 korban jiwa.<br />\r\n<br />\r\nEmiya Shirou, pemuda yang selamat dari tragedi itu bercita-cita untuk menjadi pahlawan pembela kebenaran seperti ayah angkatnya, Emiya Kiritsugu.', 0, 0, 2, 'Monday, 07-12-2020, 11:35:41', 'Wednesday, 09-12-2020, 22:54:58'),
-('3000000006', 'Fate Stay Night Heavens Feel Volume 2', 'Kinoko Nasu', 'Type Moon', '1607230349_b55372f53fc71b330bc8.jpg', 3, 'Perang Cawan Suci, sebuah peperangan antar tujuh orang master dan servant mereka untuk memperebutkan cawan suci, perangkat mahakuasa yang bisa mengabulkan berbagai macam harapan. Sepuluh tahun lalu, perang cawan suci keempat telah meluluhlantakan kota Fuyuki dan menelan 500 korban jiwa.<br />\r\n<br />\r\nEmiya Shirou, pemuda yang selamat dari tragedi itu bercita-cita untuk menjadi pahlawan pembela kebenaran seperti ayah angkatnya, Emiya Kiritsugu.', 1, 2, 5, 'Monday, 07-12-2020, 11:36:41', 'Wednesday, 09-12-2020, 22:54:45'),
-('3000000007', 'Fate Stay Night Heavens Feel Volume 3', 'Kinoko Nasu', 'Type Moon', '1607230426_ffadf184da75b43b48f5.jpg', 3, 'Perang Cawan Suci, sebuah peperangan antar tujuh orang master dan servant mereka untuk memperebutkan cawan suci, perangkat mahakuasa yang bisa mengabulkan berbagai macam harapan. Sepuluh tahun lalu, perang cawan suci keempat telah meluluhlantakan kota Fuyuki dan menelan 500 korban jiwa.<br />\r\n<br />\r\nEmiya Shirou, pemuda yang selamat dari tragedi itu bercita-cita untuk menjadi pahlawan pembela kebenaran seperti ayah angkatnya, Emiya Kiritsugu.', 1, 2, 2, 'Monday, 07-12-2020, 11:37:41', 'Wednesday, 09-12-2020, 22:52:01'),
-('3000000008', 'Fate Stay Night Heavens Feel Volume 8', 'Kinoko Nasu', 'Type Moon', '1607230520_71dc88dbffda52978f3f.jpg', 3, 'Perang Cawan Suci, sebuah peperangan antar tujuh orang master dan servant mereka untuk memperebutkan cawan suci, perangkat mahakuasa yang bisa mengabulkan berbagai macam harapan. Sepuluh tahun lalu, perang cawan suci keempat telah meluluhlantakan kota Fuyuki dan menelan 500 korban jiwa.<br />\r\n<br />\r\nEmiya Shirou, pemuda yang selamat dari tragedi itu bercita-cita untuk menjadi pahlawan pembela kebenaran seperti ayah angkatnya, Emiya Kiritsugu.', 0, 1, 3, 'Monday, 07-12-2020, 11:38:41', 'Wednesday, 09-12-2020, 22:48:04'),
-('3000000009', 'One Punch Man Volume 1', 'One Sensei', 'Viz Media', '1607230691_4b8bffb4ed637ee9c88a.jpg', 3, 'Komik One Punch Man menceritakan seorang pemuda yang ingin menjadi pahlawan, ia bernama Saitama. Selama tiga tahun Saitama berlatih tanpa henti sampai-sampai ia kehilangan rambutnya sehingga menjadi Botak. Sekarang Saitama sangat kuat dan sudah siap untuk menjadi Pahlawan, begitu banyak musuh yang sudah dikalahkannya. Bahkan ia hanya mengalahkan musuhnya dengan hanya 1 kali pukulan (One Punch).', 0, 1, 3, 'Monday, 07-12-2020, 11:39:41', 'Wednesday, 09-12-2020, 22:45:56'),
-('3000000010', 'One Punch Man Volume 2', 'One Sensei', 'Viz Media', '1607230781_dc4e8b36af8af0697c03.jpg', 3, 'Komik One Punch Man menceritakan seorang pemuda yang ingin menjadi pahlawan, ia bernama Saitama. Selama tiga tahun Saitama berlatih tanpa henti sampai-sampai ia kehilangan rambutnya sehingga menjadi Botak. Sekarang Saitama sangat kuat dan sudah siap untuk menjadi Pahlawan, begitu banyak musuh yang sudah dikalahkannya. Bahkan ia hanya mengalahkan musuhnya dengan hanya 1 kali pukulan (One Punch).', 0, 0, 1, 'Monday, 07-12-2020, 11:40:41', 'Wednesday, 09-12-2020, 22:41:29');
+('1000000001', 'Aplikasi deteksi plagiarisme dokumen skripsi menggunakan Metode Jaro Winkler', 'Maman Suryaman', 'Repositori Unsulbar', '1673317754_1342da50ae4169d25a03.pdf', 1, 'Buku ini dipersiapkan untuk mendukung kebijakan Kurikulum 2013 yang tidak sekadar secara konstitusional mempertahankan bahasa Indonesia dalam daftar mata pelajaran di sekolah. Namun, Kurikulum terbaru ini mempertegaskan pentingnya keberadaan bahasa Indonesia sebagai penghela dan pembawa ilmu pengetahuan.', 0, 0, 2, 'Monday, 07-12-2020, 11:21:41', 'Tuesday, 10-01-2323, 09:29:14'),
+('1000000002', 'Aplikasi pengenal bangunan bersejarah di Kota Malang menggunakan Convolutional Neural Network dan Li', 'Emi Emilia', 'Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud', '1673317778_af3b5664203bc55fa3b9.pdf', 1, 'Buku ini dipersiapkan untuk membangun sikap, pengetahuan, dan keterampilan berkomunikasi siswa melalui pengalaman belajar yang berbentuk beragam kegiatan berkomunikasi aktif. Isi dan pengalaman yang telah dikembangkan dalam buku ini telah diupayakan agar dapat membantu siswa mencapaiempat kompetensi inti (KI) yang diamanahkan oleh Kurikulum 2013.', 0, 0, 2, 'Monday, 07-12-2020, 11:22:41', 'Tuesday, 10-01-2323, 09:29:38'),
+('1000000003', 'Asosiasi data barang menggunakan algoritma apriori pada toko Orisha Beauty untuk peningkatan penjual', 'Andi Novianto', 'Erlangga', '1673317798_7d8ff32fd29acbfd10f4.pdf', 1, 'Buku ini diperuntukkan untuk pemebelajaran mengenai Pemrograman Dasar. Siswa akan mendapatkan teori dan implementasi penggunaan dan kegunaan dari Pemrograman. Diharapkan kedepannya siswa dapat memantapkan keahliannya untuk menuju jenjang yang lebih tinggi lagi.', 1, 5, 4, 'Monday, 07-12-2020, 11:23:41', 'Tuesday, 10-01-2323, 09:29:58'),
+('2000000001', 'Benchmarking kesiapan infrastruktur panitia lokal penyelenggara sistem seleksi elektronik ujian masu', 'Yukito Ayatsuji', 'Kadokawa Shoten', '1673317880_e9c53d50891e843e085d.pdf', 2, 'Another dimulai dengan menceritakan seorang siswi berprestasi pada tahun 1972 di SMP Yomiyama Utara. Siswi yang sangat populer di kalangan guru-guru bahkan murid lainnya. Murid itu bernama Misaki dari kelas 3-3, tetapi ia meninggal secara tiba-tiba ketika pelajaran di sekolah tengah berlangsung. Hal itulah yang disayangkan oleh para murid dan guru di sana.', 0, 3, 9, 'Monday, 07-12-2020, 11:24:41', 'Tuesday, 10-01-2323, 09:31:20'),
+('2000000002', 'Business process management system untuk sistem informasi penginapan pada syariah rooms hospitality', 'Yukito Ayatsuji', 'Kadokawa Shoten', '1673317907_c604dd378a23d42817b4.pdf', 2, 'Another dimulai dengan menceritakan seorang siswi berprestasi pada tahun 1972 di SMP Yomiyama Utara. Siswi yang sangat populer di kalangan guru-guru bahkan murid lainnya. Murid itu bernama Misaki dari kelas 3-3, tetapi ia meninggal secara tiba-tiba ketika pelajaran di sekolah tengah berlangsung. Hal itulah yang disayangkan oleh para murid dan guru di sana.', 0, 1, 4, 'Monday, 07-12-2020, 11:25:41', 'Tuesday, 10-01-2323, 09:31:47'),
+('2000000003', 'Decision support system dynamic penentuan tingkat kerusakan sektor pasca bencana alam menggunakan me', 'Naomichi Io', 'Shogakukan', '1673317934_61ae206674bfa4fc3da1.pdf', 2, 'Bercerita tentang hachiman, sosok yang lebih memilih sendiri dari pada berbaur dengan lainnya. Suatu hari ketika disuruh menulis pandangan nya terhadap masa SMA dia dianggap aneh oleh guru nya.<br />\r\n<br />\r\nKemudian dia disuruh masuk ke klub relawan, sebuah klub yang siap membantu siapa saja murid yang memiliki masalah. disana dia bertemu dengan Yukinon, seorang siswi yang pintar, cantik namun memiliki sifat yang dingin.', 0, 0, 3, 'Monday, 07-12-2020, 11:26:41', 'Tuesday, 10-01-2323, 09:32:14'),
+('2000000004', 'Decision support system dynamic untuk menentukan tingkat kerusakan sektor pasca bencana alam menggun', 'Naomichi Io', 'Shogakukan', '1673317964_4de1148ef0d9fd675bdb.pdf', 2, 'Bercerita tentang hachiman, sosok yang lebih memilih sendiri dari pada berbaur dengan lainnya. Suatu hari ketika disuruh menulis pandangan nya terhadap masa SMA dia dianggap aneh oleh guru nya.<br />\r\n<br />\r\nKemudian dia disuruh masuk ke klub relawan, sebuah klub yang siap membantu siapa saja murid yang memiliki masalah. disana dia bertemu dengan Yukinon, seorang siswi yang pintar, cantik namun memiliki sifat yang dingin.', 0, 0, 2, 'Monday, 07-12-2020, 11:27:41', 'Tuesday, 10-01-2323, 09:32:44'),
+('2000000005', 'Decision Support System pembelian Software as a Service point of sale menggunakan metode Analytical ', 'Naomichi Io', 'Shogakukan', '1673317997_046d176aa4e887d6438a.pdf', 2, 'Bercerita tentang hachiman, sosok yang lebih memilih sendiri dari pada berbaur dengan lainnya. Suatu hari ketika disuruh menulis pandangan nya terhadap masa SMA dia dianggap aneh oleh guru nya.<br />\r\n<br />\r\nKemudian dia disuruh masuk ke klub relawan, sebuah klub yang siap membantu siapa saja murid yang memiliki masalah. disana dia bertemu dengan Yukinon, seorang siswi yang pintar, cantik namun memiliki sifat yang dingin.', 0, 0, 3, 'Monday, 07-12-2020, 11:28:41', 'Tuesday, 10-01-2323, 09:33:17'),
+('2000000006', 'Document retrieval menggunakan Maximum Entropy dan Query Expansion', 'Mark Manson', 'HarperOne', '1673318029_c73f5b378bbb8da8f484.pdf', 2, 'Novel yang berjudul Sebuah Seni Untuk Bersikap Bodo Amat bercerita tentang seseorang yang bernama Charles Bukowski yang mempunyai masa lalu yang kelam, suka mabuk-mabukan, berjudi, mempermainkan wanita, kasar, tukang utang dan seorang penyair. Dia bercita-cita menjadi seorang penulis terkenal namun karya-karyanya selalu ditolak oleh hampir disetiap majalah, jurnal-jurnal, surat kabar dan penerbit lainnya.', 1, 2, 7, 'Monday, 07-12-2020, 11:29:41', 'Tuesday, 10-01-2323, 09:33:49'),
+('2000000007', 'Impementasi fuzzy expert system dan forward chaining untuk diagnosa penyakit kucing berbasis android', 'Mark Manson', 'HarperOne', '1673318070_c48d8a36fe4bc2a31ce6.pdf', 2, 'Novel yang berjudul Sebuah Seni Untuk Bersikap Bodo Amat bercerita tentang seseorang yang bernama Charles Bukowski yang mempunyai masa lalu yang kelam, suka mabuk-mabukan, berjudi, mempermainkan wanita, kasar, tukang utang dan seorang penyair. Dia bercita-cita menjadi seorang penulis terkenal namun karya-karyanya selalu ditolak oleh hampir disetiap majalah, jurnal-jurnal, surat kabar dan penerbit lainnya.', 0, 0, 1, 'Monday, 07-12-2020, 11:30:41', 'Tuesday, 10-01-2323, 09:34:30'),
+('3000000001', 'Penerapan Algoritma Differential Evolution untuk Penyelesaian Permasalahan Vehicle Routing Problem w', 'Yuki Tabata', 'Shueisha', '1673403186_ab840eae04bd8926a0cf.pdf', 3, 'Asta dan Yuno sejak kecil telah ditinggalkan oleh orang tua mereka di sebuah gereja pada saat yang sama, sejak saat itu hingga kini mereka telah di besarkan oleh pemilik gereja. Mereka berdua selalu saja bersaing untuk menentukan siapa yang lebih hebat. Walaupun begitu, kini mulai terlihat jauh kemampuan diantara keduanya.', 0, 0, 2, 'Monday, 07-12-2020, 11:31:41', 'Wednesday, 11-01-2323, 09:13:06'),
+('3000000002', 'Sistem Pendukung Keputusan penanganan kesehatan balita menggunakan penalaran Fuzzy Mamdani', 'Masashi Kishimoto', 'Shonen Jump', '1673403213_b31e4a19a155fb39cf46.pdf', 3, 'Komik ini menceritakan kisah lanjutan dari Naruto. Naruto kini telah beranjak dewasa begitu juga dengan teman – temannya. Naruto yang baru pulang dari latihannya bersama jiraiya pergi ketempat Tsunade dan bertemu dengan Sakura. Tsunade menyuruh mereka berdua untuk bertarung bersama Kakashi untuk mengukur seberapa jauh mereka berlatih dengan guru masing – masing.', 1, 1, 1, 'Monday, 07-12-2020, 11:32:41', 'Wednesday, 11-01-2323, 09:13:33'),
+('3000000003', 'Sistem Pakar Penentuan Kebutuhan Pembelajaran Bahasa Inggris Dengan Metode Fuzzy Inference System Ma', 'Hajime Isayama', 'Shonen Jump', '1673403236_a3be3bd46950895578f2.pdf', 3, 'Bercerita tentang hachiman, sosok yang lebih memilih sendiri dari pada berbaur dengan lainnya. Suatu hari ketika disuruh menulis pandangan nya terhadap masa SMA dia dianggap aneh oleh guru nya.<br />\r\n<br />\r\nKemudian dia disuruh masuk ke klub relawan, sebuah klub yang siap membantu siapa saja murid yang memiliki masalah. disana dia bertemu dengan Yukinon, seorang siswi yang pintar, cantik namun memiliki sifat yang dingin.', 0, 4, 3, 'Monday, 07-12-2020, 11:33:41', 'Wednesday, 11-01-2323, 09:13:56'),
+('3000000004', 'Penentuan jumlah produksi dengan aplikasi metode fuzzy–mamdani', 'Kazuki Takahashi', 'Shueisha', '1673403261_eb589b838b55ed4a4b7c.pdf', 3, 'Yugioh 5d adalah seri baru setelah yugioh GX, pada zaman ini menceritakan dunia di masa depan dimana kota sebelumnya bernama Domino City menjadi Neo Domino City, di masa ini, begitu banyak teknologi yang sudah dikembangkan, salah satunya adalah Riding-Duel. Riding-duel adalah duel antara duelist dengan menggunakan motor berkecepatan tinggi. Ditambah lagi apabila orang ingin melakukan Riding Duel, mereka harus mengaktifkan kartu Spell Speed World.', 0, 0, 2, 'Monday, 07-12-2020, 11:34:41', 'Wednesday, 11-01-2323, 09:14:21'),
+('3000000005', 'Model Perilaku Berjalan Agen-Agen Menggunakan Fuzzy Logic', 'Kinoko Nasu', 'Type Moon', '1673403641_6a3f60cdcaab38401c71.pdf', 3, 'Perang Cawan Suci, sebuah peperangan antar tujuh orang master dan servant mereka untuk memperebutkan cawan suci, perangkat mahakuasa yang bisa mengabulkan berbagai macam harapan. Sepuluh tahun lalu, perang cawan suci keempat telah meluluhlantakan kota Fuyuki dan menelan 500 korban jiwa.<br />\r\n<br />\r\nEmiya Shirou, pemuda yang selamat dari tragedi itu bercita-cita untuk menjadi pahlawan pembela kebenaran seperti ayah angkatnya, Emiya Kiritsugu.', 0, 0, 2, 'Monday, 07-12-2020, 11:35:41', 'Wednesday, 11-01-2323, 09:20:41'),
+('3000000006', 'Perbandingan Metode Defuzzifikasi Sistem Kendali Logika Fuzzy Model Mamdani Pada Motor DC', 'Kinoko Nasu', 'Type Moon', '1673403605_6442c8eaf0d69000337e.pdf', 3, 'Perang Cawan Suci, sebuah peperangan antar tujuh orang master dan servant mereka untuk memperebutkan cawan suci, perangkat mahakuasa yang bisa mengabulkan berbagai macam harapan. Sepuluh tahun lalu, perang cawan suci keempat telah meluluhlantakan kota Fuyuki dan menelan 500 korban jiwa.<br />\r\n<br />\r\nEmiya Shirou, pemuda yang selamat dari tragedi itu bercita-cita untuk menjadi pahlawan pembela kebenaran seperti ayah angkatnya, Emiya Kiritsugu.', 1, 2, 5, 'Monday, 07-12-2020, 11:36:41', 'Wednesday, 11-01-2323, 09:20:05'),
+('3000000007', 'Pemanfaatan Algoritma Fuzzy Evolusi Untuk Penyelesaian Kasus Travelling Salesman Problem', 'Kinoko Nasu', 'Type Moon', '1673403409_a3bbd96b48cb53628f71.pdf', 3, 'Perang Cawan Suci, sebuah peperangan antar tujuh orang master dan servant mereka untuk memperebutkan cawan suci, perangkat mahakuasa yang bisa mengabulkan berbagai macam harapan. Sepuluh tahun lalu, perang cawan suci keempat telah meluluhlantakan kota Fuyuki dan menelan 500 korban jiwa.<br />\r\n<br />\r\nEmiya Shirou, pemuda yang selamat dari tragedi itu bercita-cita untuk menjadi pahlawan pembela kebenaran seperti ayah angkatnya, Emiya Kiritsugu.', 1, 2, 2, 'Monday, 07-12-2020, 11:37:41', 'Wednesday, 11-01-2323, 09:16:49'),
+('3000000008', 'Fuzzy Mamdani Dalam Menentukan Tingkat Keberhasilan Dosen Mengajar', 'Kinoko Nasu', 'Type Moon', '1673403357_6e8f5d1943a581b8e27d.pdf', 3, 'Perang Cawan Suci, sebuah peperangan antar tujuh orang master dan servant mereka untuk memperebutkan cawan suci, perangkat mahakuasa yang bisa mengabulkan berbagai macam harapan. Sepuluh tahun lalu, perang cawan suci keempat telah meluluhlantakan kota Fuyuki dan menelan 500 korban jiwa.<br />\r\n<br />\r\nEmiya Shirou, pemuda yang selamat dari tragedi itu bercita-cita untuk menjadi pahlawan pembela kebenaran seperti ayah angkatnya, Emiya Kiritsugu.', 0, 1, 3, 'Monday, 07-12-2020, 11:38:41', 'Wednesday, 11-01-2323, 09:15:57'),
+('3000000009', 'Rancang Bangun Sistem Pendukung Keputusan Seleksi Penerimaan Tenaga Pengajar Dengan Metode Fuzzy Inf', 'One Sensei', 'Viz Media', '1673403327_5ec7b64f563fd8b03f34.pdf', 3, 'Komik One Punch Man menceritakan seorang pemuda yang ingin menjadi pahlawan, ia bernama Saitama. Selama tiga tahun Saitama berlatih tanpa henti sampai-sampai ia kehilangan rambutnya sehingga menjadi Botak. Sekarang Saitama sangat kuat dan sudah siap untuk menjadi Pahlawan, begitu banyak musuh yang sudah dikalahkannya. Bahkan ia hanya mengalahkan musuhnya dengan hanya 1 kali pukulan (One Punch).', 0, 1, 3, 'Monday, 07-12-2020, 11:39:41', 'Wednesday, 11-01-2323, 09:15:27'),
+('3000000010', 'Sistem Pendukung Keputusan Seleksi Anggota Paduan Suara Dewasa Menggunakan Metode Fuzzy Mamdani', 'One Sensei', 'Viz Media', '1673403293_088efdd5010a6c6864b1.pdf', 3, 'Komik One Punch Man menceritakan seorang pemuda yang ingin menjadi pahlawan, ia bernama Saitama. Selama tiga tahun Saitama berlatih tanpa henti sampai-sampai ia kehilangan rambutnya sehingga menjadi Botak. Sekarang Saitama sangat kuat dan sudah siap untuk menjadi Pahlawan, begitu banyak musuh yang sudah dikalahkannya. Bahkan ia hanya mengalahkan musuhnya dengan hanya 1 kali pukulan (One Punch).', 0, 0, 1, 'Monday, 07-12-2020, 11:40:41', 'Wednesday, 11-01-2323, 09:14:53'),
+('3000000011', 'Implementasi Metode Safety Stock dan Reorder Point pada Sistem Inventory Pengelolaan Stok Barang', 'aslan', 'Informatika', '1673186537_a86cb97d0dc3164b754e.pdf', 1, 'Mudah proses transfer stock, stock take, stock movement, product usage hingga delivery. Dapatkan demo gratis dan nikmati mudahnya mengelola ribuan barang gudang Anda. Terintegrasi IT Inventory. Pantau Persediaan Stok. Layanan: Layanan Pelanggan 24/7, Free Unlimited User, Praktis, Mudah dan Aman, Fitur Premium Enterprise, Harga Rasional, Demo Gratis.', 0, 0, 0, 'Sunday, 08-01-2323, 21:02:17', 'Tuesday, 10-01-2323, 10:10:27');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bukupinjam`
+-- Table structure for table `bukupinjam`
 --
 
 CREATE TABLE `bukupinjam` (
@@ -84,7 +86,7 @@ CREATE TABLE `bukupinjam` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `bukupinjam`
+-- Dumping data for table `bukupinjam`
 --
 
 INSERT INTO `bukupinjam` (`id_bukupinjam`, `nis_bukupinjam`, `no_bukupinjam`, `status_bukupinjam`, `tanggal_pinjam`, `tanggal_kembali`) VALUES
@@ -114,7 +116,7 @@ INSERT INTO `bukupinjam` (`id_bukupinjam`, `nis_bukupinjam`, `no_bukupinjam`, `s
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori`
+-- Table structure for table `kategori`
 --
 
 CREATE TABLE `kategori` (
@@ -125,20 +127,18 @@ CREATE TABLE `kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `kategori`
+-- Dumping data for table `kategori`
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `kategori-created_at`, `kategori-updated_at`) VALUES
-(1, 'Buku Ajar', 'Monday, 07-12-2020, 14:21:41', 'Monday, 07-12-2020, 14:21:41'),
-(2, 'Novel', 'Monday, 07-12-2020, 14:31:41', 'Monday, 07-12-2020, 14:31:41'),
-(3, 'Komik', 'Monday, 07-12-2020, 14:51:41', 'Monday, 07-12-2020, 14:51:41'),
-(10, 'Dongeng', 'Wednesday, 09-12-2020, 22:19:30', 'Wednesday, 09-12-2020, 22:19:30'),
-(11, 'Non Fiksi', 'Wednesday, 09-12-2020, 22:19:47', 'Wednesday, 09-12-2020, 22:19:47');
+(1, 'Rekayasa Perangkat Lunak', 'Monday, 07-12-2020, 14:21:41', 'Sunday, 08-01-2323, 09:34:04'),
+(2, 'Jaringan', 'Monday, 07-12-2020, 14:31:41', 'Sunday, 08-01-2323, 09:34:21'),
+(3, 'Sistem Cerdas', 'Monday, 07-12-2020, 14:51:41', 'Sunday, 08-01-2323, 09:34:35');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `likebuku`
+-- Table structure for table `likebuku`
 --
 
 CREATE TABLE `likebuku` (
@@ -149,7 +149,7 @@ CREATE TABLE `likebuku` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `likebuku`
+-- Dumping data for table `likebuku`
 --
 
 INSERT INTO `likebuku` (`id_likebuku`, `nis_likebuku`, `no_likebuku`, `likebuku-created_at`) VALUES
@@ -213,12 +213,12 @@ INSERT INTO `likebuku` (`id_likebuku`, `nis_likebuku`, `no_likebuku`, `likebuku-
 (69, '0035000001', '3000000006', 'Wednesday, 09-12-2020, 22:54:45'),
 (70, '0035000001', '2000000003', 'Wednesday, 09-12-2020, 22:54:50'),
 (71, '0035000001', '3000000005', 'Wednesday, 09-12-2020, 22:54:58'),
-(72, '0035000001', '3000000001', 'Wednesday, 09-12-2020, 22:55:07');
+(73, '0035000001', '3000000001', 'Saturday, 07-01-2323, 17:56:55');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -234,7 +234,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`nis`, `nama_user`, `tanggal_lahir`, `password`, `foto_profil`, `deskripsi`, `jabatan`, `user-created_at`, `user-updated_at`) VALUES
@@ -257,14 +257,14 @@ INSERT INTO `user` (`nis`, `nama_user`, `tanggal_lahir`, `password`, `foto_profi
 --
 
 --
--- Indeks untuk tabel `buku`
+-- Indexes for table `buku`
 --
 ALTER TABLE `buku`
   ADD PRIMARY KEY (`no_buku`),
   ADD KEY `buku+kategori=id_kategori` (`kategori_buku`);
 
 --
--- Indeks untuk tabel `bukupinjam`
+-- Indexes for table `bukupinjam`
 --
 ALTER TABLE `bukupinjam`
   ADD PRIMARY KEY (`id_bukupinjam`),
@@ -272,13 +272,13 @@ ALTER TABLE `bukupinjam`
   ADD KEY `bukupinjam+user=nis` (`nis_bukupinjam`);
 
 --
--- Indeks untuk tabel `kategori`
+-- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
--- Indeks untuk tabel `likebuku`
+-- Indexes for table `likebuku`
 --
 ALTER TABLE `likebuku`
   ADD PRIMARY KEY (`id_likebuku`),
@@ -286,52 +286,52 @@ ALTER TABLE `likebuku`
   ADD KEY `likebuku+user=nis` (`nis_likebuku`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`nis`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `bukupinjam`
+-- AUTO_INCREMENT for table `bukupinjam`
 --
 ALTER TABLE `bukupinjam`
   MODIFY `id_bukupinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT untuk tabel `kategori`
+-- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT untuk tabel `likebuku`
+-- AUTO_INCREMENT for table `likebuku`
 --
 ALTER TABLE `likebuku`
-  MODIFY `id_likebuku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id_likebuku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `buku`
+-- Constraints for table `buku`
 --
 ALTER TABLE `buku`
   ADD CONSTRAINT `buku+kategori=id_kategori` FOREIGN KEY (`kategori_buku`) REFERENCES `kategori` (`id_kategori`) ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `bukupinjam`
+-- Constraints for table `bukupinjam`
 --
 ALTER TABLE `bukupinjam`
   ADD CONSTRAINT `bukupinjam+buku=no_buku` FOREIGN KEY (`no_bukupinjam`) REFERENCES `buku` (`no_buku`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `bukupinjam+user=nis` FOREIGN KEY (`nis_bukupinjam`) REFERENCES `user` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `likebuku`
+-- Constraints for table `likebuku`
 --
 ALTER TABLE `likebuku`
   ADD CONSTRAINT `likebuku+buku=no_buku` FOREIGN KEY (`no_likebuku`) REFERENCES `buku` (`no_buku`) ON DELETE CASCADE ON UPDATE CASCADE,
