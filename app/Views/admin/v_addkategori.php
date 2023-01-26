@@ -1,11 +1,31 @@
-<?= $this->extend('layout/template'); ?>
+<?= $this->extend('layout/template-admin'); ?>
 
 <?= $this->section('content'); ?>
-
-<div class="card mt-3">
-    <div class="card-header">
-        <div style="font-size: 30px" align="center">Tambah Kategori Baru</div>
-    </div>
+<!-- ============================================================== -->
+<!-- Page wrapper -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Container fluid -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="row page-titles">
+            <div class="col-md-5 col-8 align-self-center">
+                <h3 class="text-themecolor m-b-0 m-t-0"><?= $title ?></h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="javascript:void(0)">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active"><?= $title ?></li>
+                </ol>
+            </div>
+            </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
     <div class="card-body">
         <form action="<?= base_url('saveAddKategori') ?>" method="post">
             <?= csrf_field(); ?>

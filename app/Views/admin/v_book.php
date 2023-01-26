@@ -30,7 +30,7 @@
 
 <div class="row">
     <div class="col mt-2">
-        <a href="<?= base_url('addBuku') ?>" class="btn btn-primary">Tambah Skripsi</a>
+        <a href="<?= base_url('addSkripsi') ?>" class="btn btn-primary">Tambah Skripsi</a>
     </div>
     <div class="col-sm-4 mt-2">
         <form style="display: inline;" action="" method="post">
@@ -59,14 +59,14 @@
     </div>
 <?php endif; ?>
 
-<div class="card card-body mt-2">
+<div class="">
     <div class="row">
         <div class="col-10 col-sm-6 float-right">
             <h3>
-                Jumlah buku total: <?= ($jumlah_buku) ? $jumlah_buku : 0 ?>
+                Jumlah skripsi total: <?= ($jumlah_skripsi) ? $jumlah_skripsi : 0 ?>
             </h3>
         </div>
-        <div class="col-12 col-sm-6 float-right">
+        <!-- <div class="col-12 col-sm-6 float-right">
             <form class="" action="" method="get">
                 <div class="input-group">
                     <input type="text" class="form-control" value="<?= (isset($_GET['keyword'])) ? $_GET['keyword'] : null ?>" name="keyword" placeholder="Masukkan Kata Kunci Pencarian" maxlength="100" autocomplete="off" autofocus>
@@ -75,14 +75,14 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </div> -->
     </div>
     <!-- Jika tidak ada user sama sekali -->
-    <?php if ($all_buku == null) { ?>
+    <?php if ($all_skripsi == null) { ?>
         <div class="card mt-4">
             <div class="card-body">
                 <h3 style="display: inline;">
-                    Tidak ada Buku.
+                    Tidak ada skripsi.
                 </h3>
             </div>
         </div>
@@ -92,7 +92,7 @@
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">No</th>
-                        <th scope="col">No Buku</th>
+                        <th scope="col">No skripsi</th>
                         <th scope="col">Nama</th>
                         <th scope="col">File</th>
                         <th scope="col">Kategori</th>
@@ -102,33 +102,33 @@
                 </thead>
                 <tbody>
                     <?php $no = 1 + (5 * ($current_page - 1));
-                    foreach ($all_buku as $buku) { ?>
+                    foreach ($all_skripsi as $skripsi) { ?>
                         <tr>
                             <td><?= $no++; ?></td>
-                            <td><?= $buku['no_buku'] ?></td>
-                            <td title="<?= $buku['nama_buku'] ?>"><?= substr($buku['nama_buku'], 0, 60) ?><?php if (strlen($buku['nama_buku']) > 60) { ?>...<?php } ?></td>
+                            <td><?= $skripsi['no_skripsi'] ?></td>
+                            <td title="<?= $skripsi['nama_skripsi'] ?>"><?= substr($skripsi['nama_skripsi'], 0, 60) ?><?php if (strlen($skripsi['nama_skripsi']) > 60) { ?>...<?php } ?></td>
                             <td>
-                                <!-- <img style="height: 90px; width:65px;" src="<?= base_url('foto/sampulbuku/' . $buku['sampul_buku']) ?>" alt="image"> -->
-                                <a href="<?Php echo base_url('foto/sampulbuku/' . $buku['sampul_buku']) ?>">Download</a>
+                                <!-- <img style="height: 90px; width:65px;" src="<?= base_url('foto/sampulbuku/' . $skripsi['file_skripsi']) ?>" alt="image"> -->
+                                <a href="<?Php echo base_url('foto/sampulbuku/' . $skripsi['file_skripsi']) ?>">Download</a>
                             </td>
-                            <td><?= $buku['nama_kategori'] ?></td>
+                            <td><?= $skripsi['nama_kategori'] ?></td>
                             <!-- <td>
-                                <?php if ($buku['status_buku'] == 1) { ?>
+                                <?php if ($skripsi['status_skripsi'] == 1) { ?>
                                     Dipinjam
                                 <?php } else { ?>
                                     Bebas
                                 <?php } ?>
                             </td> -->
                             <td>
-                                <a title="Hapus Data <?= $buku['nama_buku'] ?>" href="<?= base_url('deleteBuku/' . $buku['no_buku']) ?>" class="mt-1 btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus Buku ini?');"><i class="mdi mdi-delete"></i></a>
-                                <a title="Ubah Data <?= $buku['nama_buku'] ?>" href="<?= base_url('updateBuku/' . $buku['no_buku']) ?>" class="mt-1 btn btn-primary"><i class="mdi mdi-lead-pencil"></i></a>
-                                <a title="Lihat Detail <?= $buku['nama_buku'] ?>" href="<?= base_url('detailBuku/' . $buku['no_buku']) ?>" class="mt-1 btn btn-primary"><i class="mdi mdi-eye-outline"></i></a>
+                                <a title="Hapus Data <?= $skripsi['nama_skripsi'] ?>" href="<?= base_url('deleteSkripsi/' . $skripsi['no_skripsi']) ?>" class="mt-1 btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus skripsi ini?');"><i class="mdi mdi-delete"></i></a>
+                                <a title="Ubah Data <?= $skripsi['nama_skripsi'] ?>" href="<?= base_url('updateSkripsi/' . $skripsi['no_skripsi']) ?>" class="mt-1 btn btn-primary"><i class="mdi mdi-lead-pencil"></i></a>
+                                <a title="Lihat Detail <?= $skripsi['nama_skripsi'] ?>" href="<?= base_url('detailSkripsi/' . $skripsi['no_skripsi']) ?>" class="mt-1 btn btn-primary"><i class="mdi mdi-eye-outline"></i></a>
                             </td>
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
-            <?= $pager->links('buku', 'custom_pagination') ?>
+            <?= $pager->links('skripsi', 'custom_pagination') ?>
         </div>
     <?php } ?>
 </div>

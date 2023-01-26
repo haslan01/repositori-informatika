@@ -4,25 +4,25 @@ namespace App\Controllers;
 
 // Model yang digunakan
 use App\Models\UserModel;
-use App\Models\BukuModel;
+use App\Models\SkripsiModel;
 use App\Models\KategoriModel;
-use App\Models\BukupinjamModel;
+// use App\Models\skripsipinjamModel;
 use TCPDF;
 
 class AdminController extends BaseController
 {
     protected $UserModel;
-    protected $BukuModel;
+    protected $SkripsiModel;
     protected $KategoriModel;
-    protected $BukupinjamModel;
+    // protected $pengarang_skripsipinjamModel;
     protected $Waktu;
 
     public function __construct()
     {
         $this->UserModel = new UserModel;
-        $this->BukuModel = new BukuModel;
+        $this->SkripsiModel = new SkripsiModel;
         $this->KategoriModel = new KategoriModel;
-        $this->BukupinjamModel = new BukupinjamModel;
+        // $this->skripsipinjamModel = new skripsipinjamModel;
 
         // l = nama hari, d-m-yy = hari, bulan, dan tahun, H:i:s = jam, menit, dan detik.
         $this->Waktu = date('l, d-m-yy, H:i:s');
@@ -42,10 +42,10 @@ class AdminController extends BaseController
         $data['user'] = $this->UserModel->select('nis, nama_user, foto_profil, jabatan')->find(session()->get('nis'));
         $data['jumlah'] = [
             'siswa' => $this->UserModel->where('jabatan', 2)->countAllResults(),
-            'buku' => $this->BukuModel->countAllResults(),
+            'skripsi' => $this->SkripsiModel->countAllResults(),
             'kategori' => $this->KategoriModel->countAllResults(),
-            'peminjaman' => $this->BukupinjamModel->where('status_bukupinjam', 0)->countAllResults(),
-            'pengembalian' => $this->BukupinjamModel->where('status_bukupinjam', 1)->countAllResults(),
+            // 'peminjaman' => $this->skripsipinjamModel->where('status_skripsipinjam', 0)->countAllResults(),
+            // 'pengembalian' => $this->skripsipinjamModel->where('status_skripsipinjam', 1)->countAllResults(),
         ];
         $data['kategori_footer'] = $this->KategoriModel->select('nama_kategori')->findAll(5);
         return view('admin/v_admin', $data);
@@ -338,12 +338,12 @@ class AdminController extends BaseController
         if ($user == null) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException();
         } else {
-            // Jika user tersebut masih meminjam buku dan belum mengembalikannya
-            if ($this->BukupinjamModel->select('id_bukupinjam')->where(['nis_bukupinjam' => $user['nis'], 'status_bukupinjam' => 0])->first() != null) {
-                // Membuat sebuah flash data pesan gagal
-                session()->setFlashdata('danger', 'Siswa tersebut gagal dihapus karena masih memiliki pinjaman buku.');
-                return redirect()->back();
-            } else {
+            // Jika user tersebut masih meminjam skripsi dan belum mengembalikannya
+            // if ($this->skripsipinjamModel->select('id_skripsipinjam')->where(['nis_skripsipinjam' => $user['nis'], 'status_skripsipinjam' => 0])->first() != null) {
+            //     // Membuat sebuah flash data pesan gagal
+            //     session()->setFlashdata('danger', 'Siswa tersebut gagal dihapus karena masih memiliki pinjaman skripsi.');
+            //     return redirect()->back();
+            // } else {
                 // Cek apakah profil berupa gambar default, jika bukan maka profil akan terhapus
                 if ($user['foto_profil'] != 'default.png') {
                     // Menghapus foto yang lama
@@ -353,7 +353,7 @@ class AdminController extends BaseController
                 // Membuat sebuah flash data pesan berhasil
                 session()->setFlashdata('success', 'Siswa berhasil dihapus.');
                 return redirect()->back();
-            }
+            // }
         }
     }
 
@@ -375,56 +375,56 @@ class AdminController extends BaseController
             $keyword = $this->request->getVar('keyword');
             // Jika ada filter kategori
             if (session()->get('kategori_book')) {
-                // Mengambil semua data buku + join kategori
-                $data['all_buku'] = $this->BukuModel->select('no_buku, nama_buku, sampul_buku, nama_kategori, status_buku')->join('kategori', 'kategori.id_kategori = buku.kategori_buku')->groupStart()->like('no_buku', $keyword)->orLike('nama_buku', $keyword)->orLike('pengarang_buku', $keyword)->orLike('penerbit_buku', $keyword)->groupEnd()->where('nama_kategori', session()->get('kategori_book'))->paginate(5, 'buku');
+                // Mengambil semua data skripsi + join kategori
+                $data['all_skripsi'] = $this->SkripsiModel->select('no_skripsi, nama_skripsi, file_skripsi, nama_kategori, status_skripsi')->join('kategori', 'kategori.id_kategori = skripsi.kategori_skripsi')->groupStart()->like('no_skripsi', $keyword)->orLike('nama_skripsi', $keyword)->orLike('pengarang_skripsi', $keyword)->orLike('penerbit_skripsi', $keyword)->groupEnd()->where('nama_kategori', session()->get('kategori_book'))->paginate(5, 'skripsi');
                 // Menghitung jumlah
-                $data['jumlah_buku'] = $this->BukuModel->join('kategori', 'kategori.id_kategori = buku.kategori_buku')->groupStart()->like('no_buku', $keyword)->orLike('nama_buku', $keyword)->orLike('pengarang_buku', $keyword)->orLike('penerbit_buku', $keyword)->groupEnd()->where('nama_kategori', session()->get('kategori_book'))->countAllResults();
+                $data['jumlah_skripsi'] = $this->SkripsiModel->join('kategori', 'kategori.id_kategori = skripsi.kategori_skripsi')->groupStart()->like('no_skripsi', $keyword)->orLike('nama_skripsi', $keyword)->orLike('pengarang_skripsi', $keyword)->orLike('penerbit_skripsi', $keyword)->groupEnd()->where('nama_kategori', session()->get('kategori_book'))->countAllResults();
             } else {
-                // Mengambil semua data buku + join kategori
-                $data['all_buku'] = $this->BukuModel->select('no_buku, nama_buku, sampul_buku, nama_kategori, status_buku')->join('kategori', 'kategori.id_kategori = buku.kategori_buku')->like('no_buku', $keyword)->orLike('nama_buku', $keyword)->orLike('pengarang_buku', $keyword)->orLike('penerbit_buku', $keyword)->paginate(5, 'buku');
+                // Mengambil semua data skripsi + join kategori
+                $data['all_skripsi'] = $this->SkripsiModel->select('no_skripsi, nama_skripsi, file_skripsi, nama_kategori, status_skripsi')->join('kategori', 'kategori.id_kategori = skripsi.kategori_skripsi')->like('no_skripsi', $keyword)->orLike('nama_skripsi', $keyword)->orLike('pengarang_skripsi', $keyword)->orLike('penerbit_skripsi', $keyword)->paginate(5, 'skripsi');
                 // Menghitung jumlah
-                $data['jumlah_buku'] = $this->BukuModel->join('kategori', 'kategori.id_kategori = buku.kategori_buku')->like('no_buku', $keyword)->orLike('nama_buku', $keyword)->orLike('pengarang_buku', $keyword)->orLike('penerbit_buku', $keyword)->countAllResults();
+                $data['jumlah_skripsi'] = $this->SkripsiModel->join('kategori', 'kategori.id_kategori = skripsi.kategori_skripsi')->like('no_skripsi', $keyword)->orLike('nama_skripsi', $keyword)->orLike('pengarang_skripsi', $keyword)->orLike('penerbit_skripsi', $keyword)->countAllResults();
             }
         } else if (session()->get('kategori_book')) {
-            // Mengambil semua data buku + join kategori
-            $data['all_buku'] = $this->BukuModel->select('no_buku, nama_buku, sampul_buku, nama_kategori, status_buku')->where('nama_kategori', session()->get('kategori_book'))->join('kategori', 'kategori.id_kategori = buku.kategori_buku')->paginate(5, 'buku');
-            // Menghitung semua data buku yang ditemukan
-            $data['jumlah_buku'] = $this->BukuModel->where('nama_kategori', session()->get('kategori_book'))->join('kategori', 'kategori.id_kategori = buku.kategori_buku')->countAllResults();
+            // Mengambil semua data skripsi + join kategori
+            $data['all_skripsi'] = $this->SkripsiModel->select('no_skripsi, nama_skripsi, file_skripsi, nama_kategori, status_skripsi')->where('nama_kategori', session()->get('kategori_book'))->join('kategori', 'kategori.id_kategori = skripsi.kategori_skripsi')->paginate(5, 'skripsi');
+            // Menghitung semua data skripsi yang ditemukan
+            $data['jumlah_skripsi'] = $this->SkripsiModel->where('nama_kategori', session()->get('kategori_book'))->join('kategori', 'kategori.id_kategori = skripsi.kategori_skripsi')->countAllResults();
         } else {
-            // Mengambil semua data buku + join kategori
-            $data['all_buku'] = $this->BukuModel->select('no_buku, nama_buku, sampul_buku, nama_kategori, status_buku')->join('kategori', 'kategori.id_kategori = buku.kategori_buku')->paginate(5, 'buku');
-            // Menghitung semua data buku yang ditemukan
-            $data['jumlah_buku'] = $this->BukuModel->countAllResults();
+            // Mengambil semua data skripsi + join kategori
+            $data['all_skripsi'] = $this->SkripsiModel->select('no_skripsi, nama_skripsi, file_skripsi, nama_kategori, status_skripsi')->join('kategori', 'kategori.id_kategori = skripsi.kategori_skripsi')->paginate(5, 'skripsi');
+            // Menghitung semua data skripsi yang ditemukan
+            $data['jumlah_skripsi'] = $this->SkripsiModel->countAllResults();
         }
         $data['title'] = 'Skripsi (Admin)';
         $data['user'] = $this->UserModel->select('nis, nama_user, foto_profil, jabatan')->find(session()->get('nis'));
         $data['kategori'] = $this->KategoriModel->select('nama_kategori')->findAll();
-        $data['pager'] = $this->BukuModel->pager;
-        $data['current_page'] = $this->request->getVar('page_buku') ? $this->request->getVar('page_buku') : 1;
+        $data['pager'] = $this->SkripsiModel->pager;
+        $data['current_page'] = $this->request->getVar('page_skripsi') ? $this->request->getVar('page_skripsi') : 1;
         $data['kategori_footer'] = $this->KategoriModel->select('nama_kategori')->findAll(5);
         return view('admin/v_book', $data);
     }
 
-    // Method untuk halaman penambahand data buku baru (admin)
-    public function addBuku()
+    // Method untuk halaman penambahand data skripsi baru (admin)
+    public function addskripsi()
     {
         $data['title'] = 'Add Skripsi (Admin)';
         $data['user'] = $this->UserModel->select('nis, nama_user, foto_profil, jabatan')->find(session()->get('nis'));
         $data['kategori'] = $this->KategoriModel->select('nama_kategori')->findAll();
         $data['kategori_footer'] = $this->KategoriModel->select('nama_kategori')->findAll(5);
-        return view('admin/v_addbuku', $data);
+        return view('admin/v_addskripsi', $data);
     }
     
-    // Method untuk menyimpan data buku baru (admin)
-    public function saveAddBuku()
+    // Method untuk menyimpan data skripsi baru (admin)
+    public function saveAddskripsi()
     {
         // Jika terdapat request dengan metode post
         if ($this->request->getMethod() == 'post') {
             $rules = [
-                // Validasi untuk form no_buku
-                'no_buku' => [
-                    'label' => 'No Buku',
-                    'rules' => 'required|numeric|exact_length[10]|is_unique[buku.no_buku]|max_length[18]',
+                // Validasi untuk form no_skripsi
+                'no_skripsi' => [
+                    'label' => 'No skripsi',
+                    'rules' => 'required|numeric|exact_length[10]|is_unique[skripsi.no_skripsi]|max_length[18]',
                     'errors' => [
                         'required' => '{field} harus diisi',
                         'numeric' => '{field} hanya boleh mengandung angka',
@@ -435,7 +435,7 @@ class AdminController extends BaseController
                 ],
                 // Validasi untuk form nama
                 'nama' => [
-                    'label' => 'Nama Buku',
+                    'label' => 'Nama skripsi',
                     'rules' => 'required|max_length[150]',
                     'errors' => [
                         'required' => '{field} harus diisi',
@@ -463,7 +463,7 @@ class AdminController extends BaseController
                 ],
                 // Validasi untuk sampul
                 'sampul' => [
-                    'label' => 'Sampul Buku',
+                    'label' => 'File skripsi',
                     'rules' => 'max_size[sampul,1024]|mime_in[sampul,application/pdf]',
                     'errors' => [
                         'max_size' => 'Ukuran {field} terlalu besar (max: 1024 kb)',
@@ -495,9 +495,9 @@ class AdminController extends BaseController
                 $data['user'] = $this->UserModel->select('nis, nama_user, foto_profil, jabatan')->find(session()->get('nis'));
                 $data['kategori'] = $this->KategoriModel->select('nama_kategori')->findAll();
                 $data['validation'] = $this->validator;
-                // Redirect ke halaman add buku
+                // Redirect ke halaman add skripsi
                 $data['kategori_footer'] = $this->KategoriModel->select('nama_kategori')->findAll(5);
-                return view('admin/v_addbuku', $data);
+                return view('admin/v_addskripsi', $data);
             }
 
             // Jika tidak terdapat kesalahan saat validasi
@@ -508,7 +508,7 @@ class AdminController extends BaseController
                 if ($image->getError() != 4) {
                     //Membuat nama random untuk sampul
                     $name = $image->getRandomName();
-                    // Memindahkan file foto yang diupload user ke dalam folder foto/sampulbuku
+                    // Memindahkan file foto yang diupload user ke dalam folder foto/sampulskripsi
                     $image->move('foto/sampulbuku', $name);
                 }
                 // Menentukan id kategori
@@ -516,29 +516,29 @@ class AdminController extends BaseController
 
                 // Membuat variabel data untuk menampung data baru
                 $data = [
-                    'no_buku' => htmlspecialchars($this->request->getVar('no_buku')),
-                    'nama_buku' => htmlspecialchars($this->request->getVar('nama')),
-                    'pengarang_buku' => htmlspecialchars($this->request->getVar('pengarang')),
-                    'penerbit_buku' => htmlspecialchars($this->request->getVar('penerbit')),
-                    'kategori_buku' => $kategori,
-                    'buku-created_at' => $this->Waktu,
-                    'buku-updated_at' => $this->Waktu,
+                    'no_skripsi' => htmlspecialchars($this->request->getVar('no_skripsi')),
+                    'nama_skripsi' => htmlspecialchars($this->request->getVar('nama')),
+                    'pengarang_skripsi' => htmlspecialchars($this->request->getVar('pengarang')),
+                    'penerbit_skripsi' => htmlspecialchars($this->request->getVar('penerbit')),
+                    'kategori_skripsi' => $kategori,
+                    'skripsi-created_at' => $this->Waktu,
+                    'skripsi-updated_at' => $this->Waktu,
                 ];
 
-                // Jika ada sampul maka tambahkan
+                // Jika ada file maka tambahkan
                 if ($image->getError() != 4) {
-                    $data['sampul_buku'] = $name;
+                    $data['file_skripsi'] = $name;
                 }
 
                 // Jika ada deskripsi maka tambahkan
                 if ($this->request->getVar('deskripsi')) {
-                    $data['deskripsi_buku'] = nl2br(htmlspecialchars($this->request->getVar('deskripsi')));
+                    $data['deskripsi_skripsi'] = nl2br(htmlspecialchars($this->request->getVar('deskripsi')));
                 }
 
                 // Menyimpan data baru
-                $this->BukuModel->insert($data);
+                $this->SkripsiModel->insert($data);
                 // Membuat sebuah flash data pesan berhasil
-                session()->setFlashdata('success', 'Buku berhasil ditambahkan.');
+                session()->setFlashdata('success', 'skripsi berhasil ditambahkan.');
                 // Arahkan ke book
                 return redirect()->to(base_url('book'));
             }
@@ -547,35 +547,35 @@ class AdminController extends BaseController
         }
     }
 
-    // Method untuk halaman perubahan data buku (admin)
-    public function updateBuku($no_buku)
+    // Method untuk halaman perubahan data skripsi (admin)
+    public function updateSkripsi($no_skripsi)
     {
-        // Jika buku dengan no_buku tersebut tidak ada
-        if ($this->BukuModel->select('no_buku')->find($no_buku) == null) {
+        // Jika skripsi dengan no_skripsi tersebut tidak ada
+        if ($this->SkripsiModel->select('no_skripsi')->find($no_skripsi) == null) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException();
         } else {
             $data['title'] = 'Update Skripsi (Admin)';
             $data['user'] = $this->UserModel->select('nis, nama_user, foto_profil, jabatan')->find(session()->get('nis'));
-            $data['buku_update'] = $this->BukuModel->select('no_buku, nama_buku, pengarang_buku, penerbit_buku, sampul_buku, nama_kategori, deskripsi_buku')->where('no_buku', $no_buku)->join('kategori', 'kategori.id_kategori = buku.kategori_buku')->first();
+            $data['skripsi_update'] = $this->SkripsiModel->select('no_skripsi, nama_skripsi, pengarang_skripsi, penerbit_skripsi, file_skripsi, nama_kategori, deskripsi_skripsi')->where('no_skripsi', $no_skripsi)->join('kategori', 'kategori.id_kategori = skripsi.kategori_skripsi')->first();
             $data['kategori'] = $this->KategoriModel->select('nama_kategori')->findAll();
             $data['kategori_footer'] = $this->KategoriModel->select('nama_kategori')->findAll(5);
-            return view('admin/v_updatebuku', $data);
+            return view('admin/v_updateskripsi', $data);
         }
     }
 
-    // Method untuk menyimpan perubahan data buku (admin)
-    public function saveUpdateBuku($no_buku)
+    // Method untuk menyimpan perubahan data skripsi (admin)
+    public function saveUpdateSkripsi($no_skripsi)
     {
         // Jika terdapat request dengan metode post
         if ($this->request->getMethod() == 'post') {
-            // Jika buku dengan no_buku tersebut tidak ada
-            if ($this->BukuModel->select('no_buku')->find($no_buku) == null) {
+            // Jika skripsi dengan no_skripsi tersebut tidak ada
+            if ($this->SkripsiModel->select('no_skripsi')->find($no_skripsi) == null) {
                 throw new \CodeIgniter\Exceptions\PageNotFoundException();
             } else {
                 $rules = [
                     // Validasi untuk form nama
                     'nama' => [
-                        'label' => 'Nama Buku',
+                        'label' => 'Nama skripsi',
                         'rules' => 'required|max_length[150]',
                         'errors' => [
                             'required' => '{field} harus diisi',
@@ -622,7 +622,7 @@ class AdminController extends BaseController
                 if ($this->request->getFile('sampul')->getError() != 4) {
                     // Validasi untuk sampul
                     $rules['sampul'] = [
-                        'label' => 'Sampul Buku',
+                        'label' => 'File skripsi',
                         'rules' => 'max_size[sampul,11024]|mime_in[sampul,application/pdf]',
                         'errors' => [
                             'max_size' => 'Ukuran {field} terlalu besar (max: 1024 kb)',
@@ -636,12 +636,12 @@ class AdminController extends BaseController
                     // Membuat variabel untuk menampung semua pesan kesalahan dari validasi
                     $data['title'] = 'Update Skripsi (Admin)';
                     $data['user'] = $this->UserModel->select('nis, nama_user, foto_profil, jabatan')->find(session()->get('nis'));
-                    $data['buku_update'] = $this->BukuModel->select('no_buku, nama_buku, pengarang_buku, penerbit_buku, sampul_buku, nama_kategori, deskripsi_buku')->where('no_buku', $no_buku)->join('kategori', 'kategori.id_kategori = buku.kategori_buku')->first();
+                    $data['skripsi_update'] = $this->SkripsiModel->select('no_skripsi, nama_skripsi, pengarang_skripsi, penerbit_skripsi, file_skripsi, nama_kategori, deskripsi_skripsi')->where('no_skripsi', $no_skripsi)->join('kategori', 'kategori.id_kategori = skripsi.kategori_skripsi')->first();
                     $data['kategori'] = $this->KategoriModel->select('nama_kategori')->findAll();
                     $data['validation'] = $this->validator;
-                    // Redirect ke halaman add buku
+                    // Redirect ke halaman add skripsi
                     $data['kategori_footer'] = $this->KategoriModel->select('nama_kategori')->findAll(5);
-                    return view('admin/v_updatebuku', $data);
+                    return view('admin/v_updateskripsi', $data);
                 }
 
                 // Jika tidak terdapat kesalahan saat validasi
@@ -652,7 +652,7 @@ class AdminController extends BaseController
                     if ($image->getError() != 4) {
                         //Membuat nama random untuk sampul
                         $name = $image->getRandomName();
-                        // Memindahkan file foto yang diupload user ke dalam folder foto/sampulbuku
+                        // Memindahkan file foto yang diupload user ke dalam folder foto/sampulskripsi
                         $image->move('foto/sampulbuku', $name);
                     }
                     // Menentukan id kategori
@@ -660,28 +660,28 @@ class AdminController extends BaseController
 
                     // Membuat variabel data untuk menampung data baru
                     $data = [
-                        'no_buku' => $no_buku,
-                        'nama_buku' => htmlspecialchars($this->request->getVar('nama')),
-                        'pengarang_buku' => htmlspecialchars($this->request->getVar('pengarang')),
-                        'penerbit_buku' => htmlspecialchars($this->request->getVar('penerbit')),
-                        'kategori_buku' => $kategori,
-                        'buku-updated_at' => $this->Waktu,
+                        'no_skripsi' => $no_skripsi,
+                        'nama_skripsi' => htmlspecialchars($this->request->getVar('nama')),
+                        'pengarang_skripsi' => htmlspecialchars($this->request->getVar('pengarang')),
+                        'penerbit_skripsi' => htmlspecialchars($this->request->getVar('penerbit')),
+                        'kategori_skripsi' => $kategori,
+                        'skripsi-updated_at' => $this->Waktu,
                     ];
 
                     // Jika ada sampul maka tambahkan
                     if ($image->getError() != 4) {
-                        $data['sampul_buku'] = $name;
+                        $data['file_skripsi'] = $name;
                     }
 
                     // Jika ada deskripsi maka tambahkan
                     if ($this->request->getVar('deskripsi')) {
-                        $data['deskripsi_buku'] = nl2br(htmlspecialchars($this->request->getVar('deskripsi')));
+                        $data['deskripsi_skripsi'] = nl2br(htmlspecialchars($this->request->getVar('deskripsi')));
                     }
 
                     // Menyimpan data baru
-                    $this->BukuModel->save($data);
+                    $this->SkripsiModel->save($data);
                     // Membuat sebuah flash data pesan berhasil
-                    session()->setFlashdata('success', 'Buku berhasil diubah.');
+                    session()->setFlashdata('success', 'skripsi berhasil diubah.');
                     // Arahkan ke book
                     return redirect()->to(base_url('book'));
                 }
@@ -691,29 +691,29 @@ class AdminController extends BaseController
         }
     }
 
-    // Method untuk menghapus data buku (admin)
-    public function deleteBuku($no_buku)
+    // Method untuk menghapus data skripsi (admin)
+    public function deleteSkripsi($no_skripsi)
     {
-        // Mengambil buku
-        $buku = $this->BukuModel->find($no_buku);
-        // Jika buku dengan no_buku tersebut tidak ada
-        if ($buku == null) {
+        // Mengambil skripsi
+        $skripsi = $this->SkripsiModel->find($no_skripsi);
+        // Jika skripsi dengan no_skripsi tersebut tidak ada
+        if ($skripsi == null) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException();
         } else {
-            // Jika buku tersebut masih dipinjam oleh user dan belum dikembalikan
-            if ($this->BukuModel->where(['no_buku' => $no_buku, 'status_buku' => 1])->find() != null) {
+            // Jika skripsi tersebut masih dipinjam oleh user dan belum dikembalikan
+            if ($this->SkripsiModel->where(['no_skripsi' => $no_skripsi, 'status_skripsi' => 1])->find() != null) {
                 // Membuat sebuah flash data pesan berhasil
-                session()->setFlashdata('danger', 'Buku tersebut gagal dihapus karena masih ada Siswa yang meminjamnya.');
+                session()->setFlashdata('danger', 'skripsi tersebut gagal dihapus karena masih ada Siswa yang meminjamnya.');
                 return redirect()->back();
             } else {
                 // Cek apakah sampul berupa gambar default, jika bukan maka sampul akan terhapus
-                if ($buku['sampul_buku'] != 'default.png') {
+                if ($skripsi['file_skripsi'] != 'default.png') {
                     // Menghapus sampul yang lama
-                    unlink('foto/sampulbuku/' . $buku['sampul_buku']);
+                    unlink('foto/sampulbuku/' . $skripsi['file_skripsi']);
                 }
-                $this->BukuModel->delete($no_buku);
+                $this->SkripsiModel->delete($no_skripsi);
                 // Membuat sebuah flash data pesan berhasil
-                session()->setFlashdata('success', 'Buku berhasil dihapus.');
+                session()->setFlashdata('success', 'skripsi berhasil dihapus.');
                 return redirect()->back();
             }
         }
@@ -771,7 +771,7 @@ class AdminController extends BaseController
                 $data['title'] = 'Add Kategori (Admin)';
                 $data['user'] = $this->UserModel->select('nis, nama_user, foto_profil, jabatan')->find(session()->get('nis'));
                 $data['validation'] = $this->validator;
-                // Redirect ke halaman add buku
+                // Redirect ke halaman add skripsi
                 $data['kategori_footer'] = $this->KategoriModel->select('nama_kategori')->findAll(5);
                 return view('admin/v_addkategori', $data);
             }
@@ -802,7 +802,7 @@ class AdminController extends BaseController
     {
         // Mengambil kategori
         $kategori = $this->KategoriModel->select('id_kategori, nama_kategori')->find($id_kategori);
-        // Jika buku dengan id_kategori tersebut tidak ada
+        // Jika skripsi dengan id_kategori tersebut tidak ada
         if ($kategori == null) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException();
         } else {
@@ -821,7 +821,7 @@ class AdminController extends BaseController
         $kategori = $this->KategoriModel->select('id_kategori, nama_kategori')->find($id_kategori);
         // Jika terdapat request dengan metode post
         if ($this->request->getMethod() == 'post') {
-            // Jika buku dengan id_kategori tersebut tidak ada
+            // Jika skripsi dengan id_kategori tersebut tidak ada
             if ($kategori == null) {
                 throw new \CodeIgniter\Exceptions\PageNotFoundException();
             } else {
@@ -887,16 +887,16 @@ class AdminController extends BaseController
     // Method untuk menghapus data kategori (admin)
     public function deleteKategori($id_kategori)
     {
-        // Jika buku dengan id_kategori tersebut tidak ada
+        // Jika skripsi dengan id_kategori tersebut tidak ada
         if ($this->KategoriModel->select('id_kategori')->find($id_kategori) == null) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException();
         } else {
-            // Mengecek apakah ada buku yang berelasi dengan kategori ini
-            $free = $this->BukuModel->select('no_buku')->where('kategori_buku', $id_kategori)->first();
+            // Mengecek apakah ada skripsi yang berelasi dengan kategori ini
+            $free = $this->SkripsiModel->select('no_skripsi')->where('kategori_skripsi', $id_kategori)->first();
             // Jika ada yang berelasi
             if ($free != null) {
                 // Membuat sebuah flash data pesan gagal
-                session()->setFlashdata('danger', 'Kategori tersebut gagal dihapus karena masih ada buku yang menggunakannya.');
+                session()->setFlashdata('danger', 'Kategori tersebut gagal dihapus karena masih ada skripsi yang menggunakannya.');
                 return redirect()->back();
             } else {
                 $this->KategoriModel->delete($id_kategori);
@@ -904,108 +904,6 @@ class AdminController extends BaseController
                 session()->setFlashdata('success', 'Kategori berhasil dihapus.');
                 return redirect()->back();
             }
-        }
-    }
-
-    // Method untuk halaman peminjaman (admin)
-    public function peminjaman()
-    {
-        // Jika ada pencarian
-        if ($this->request->getVar('keyword')) {
-            // Mengambil keyword
-            $keyword = $this->request->getVar('keyword');
-            // Mencari buku
-            $data['peminjaman'] = $this->BukupinjamModel->select('nama_user, foto_profil, nama_buku, sampul_buku, tanggal_pinjam, id_bukupinjam')->join('user', 'user.nis = bukupinjam.nis_bukupinjam')->join('buku', 'buku.no_buku = bukupinjam.no_bukupinjam')->where('status_bukupinjam', 0)->groupStart()->like('nis', $keyword)->orLike('nama_user', $keyword)->orLike('no_buku', $keyword)->orLike('nama_buku', $keyword)->orLike('pengarang_buku', $keyword)->orLike('penerbit_buku', $keyword)->groupEnd()->orderBy('tanggal_pinjam', 'DESC')->paginate(5, 'bukupinjam');
-            // Menghitung buku yang ditemukan
-            $data['jumlah_peminjaman'] = $this->BukupinjamModel->join('user', 'user.nis = bukupinjam.nis_bukupinjam')->join('buku', 'buku.no_buku = bukupinjam.no_bukupinjam')->where('status_bukupinjam', 0)->groupStart()->like('nis', $keyword)->orLike('nama_user', $keyword)->orLike('no_buku', $keyword)->orLike('nama_buku', $keyword)->orLike('pengarang_buku', $keyword)->orLike('penerbit_buku', $keyword)->groupEnd()->countAllResults();
-        } else {
-            $data['peminjaman'] = $this->BukupinjamModel->select('nama_user, foto_profil, nama_buku, sampul_buku, tanggal_pinjam, id_bukupinjam')->where('status_bukupinjam', 0)->join('user', 'user.nis = bukupinjam.nis_bukupinjam')->join('buku', 'buku.no_buku = bukupinjam.no_bukupinjam')->orderBy('tanggal_pinjam', 'DESC')->paginate(5, 'bukupinjam');
-            $data['jumlah_peminjaman'] = $this->BukupinjamModel->where('status_bukupinjam', 0)->countAllResults();
-        }
-        $data['title'] = 'Peminjaman (Admin)';
-        $data['user'] = $this->UserModel->select('nis, nama_user, foto_profil, jabatan')->find(session()->get('nis'));
-        $data['pager'] = $this->BukupinjamModel->pager;
-        $data['current_page'] = $this->request->getVar('page_bukupinjam') ? $this->request->getVar('page_bukupinjam') : 1;
-        $data['kategori_footer'] = $this->KategoriModel->select('nama_kategori')->findAll(5);
-        return view('admin/v_peminjaman', $data);
-    }
-
-    // Method untuk halaman pengembalian (admin)
-    public function pengembalian()
-    {
-        // Jika ada pencarian
-        if ($this->request->getVar('keyword')) {
-            // Mengambil keyword
-            $keyword = $this->request->getVar('keyword');
-            // Mencari buku
-            $data['pengembalian'] = $this->BukupinjamModel->select('nama_user, foto_profil, nama_buku, sampul_buku, tanggal_kembali, id_bukupinjam')->join('user', 'user.nis = bukupinjam.nis_bukupinjam')->join('buku', 'buku.no_buku = bukupinjam.no_bukupinjam')->where('status_bukupinjam', 1)->groupStart()->like('nis', $keyword)->orLike('nama_user', $keyword)->orLike('no_buku', $keyword)->orLike('nama_buku', $keyword)->orLike('pengarang_buku', $keyword)->orLike('penerbit_buku', $keyword)->groupEnd()->orderBy('tanggal_kembali', 'DESC')->paginate(5, 'bukupinjam');
-            // Menghitung buku yang ditemukan
-            $data['jumlah_pengembalian'] = $this->BukupinjamModel->join('user', 'user.nis = bukupinjam.nis_bukupinjam')->join('buku', 'buku.no_buku = bukupinjam.no_bukupinjam')->where('status_bukupinjam', 1)->groupStart()->like('nis', $keyword)->orLike('nama_user', $keyword)->orLike('no_buku', $keyword)->orLike('nama_buku', $keyword)->orLike('pengarang_buku', $keyword)->orLike('penerbit_buku', $keyword)->groupEnd()->countAllResults();
-        } else {
-            $data['pengembalian'] = $this->BukupinjamModel->select('nama_user, foto_profil, nama_buku, sampul_buku, tanggal_kembali, id_bukupinjam')->where('status_bukupinjam', 1)->join('user', 'user.nis = bukupinjam.nis_bukupinjam')->join('buku', 'buku.no_buku = bukupinjam.no_bukupinjam')->orderBy('tanggal_kembali', 'DESC')->paginate(5, 'bukupinjam');
-            $data['jumlah_pengembalian'] = $this->BukupinjamModel->where('status_bukupinjam', 1)->countAllResults();
-        }
-        $data['title'] = 'Pengembalian (Admin)';
-        $data['user'] = $this->UserModel->select('nis, nama_user, foto_profil, jabatan')->find(session()->get('nis'));
-        $data['pager'] = $this->BukupinjamModel->pager;
-        $data['current_page'] = $this->request->getVar('page_bukupinjam') ? $this->request->getVar('page_bukupinjam') : 1;
-        $data['kategori_footer'] = $this->KategoriModel->select('nama_kategori')->findAll(5);
-        return view('admin/v_pengembalian', $data);
-    }
-
-    // Method untuk mencetak laporan peminjaman (admin)
-    public function cetakLaporanPeminjaman($id_bukupinjam)
-    {
-        // Jika peminjaman tersebut tidak ada
-        if ($this->BukupinjamModel->where(['id_bukupinjam' => $id_bukupinjam, 'status_bukupinjam' => 0])->find() == null) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException();
-        } else {
-            $data['bukupinjam'] = $this->BukupinjamModel->where('id_bukupinjam', $id_bukupinjam)->join('user', 'user.nis = bukupinjam.nis_bukupinjam')->join('buku', 'buku.no_buku = bukupinjam.no_bukupinjam')->find()[0];
-
-            $html = view('print/v_print_peminjaman.php', $data);
-
-            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-            $pdf->SetCreator(PDF_CREATOR);
-            $pdf->SetAuthor('Andry Pebrianto');
-            $pdf->SetTitle('Cetak Laporan Peminjaman');
-            $pdf->SetSubject('Cetak Laporan Peminjaman');
-
-            $pdf->setPrintHeader(false);
-            $pdf->setPrintFooter(false);
-
-            $pdf->AddPage();
-
-            $pdf->writeHTML($html, true, false, true, false, '');
-            $this->response->setContentType('application/pdf');
-            $pdf->Output('laporan-peminjaman.pdf', 'I');
-        }
-    }
-
-    // Method untuk mencetak laporan pengembalian (admin)
-    public function cetakLaporanPengembalian($id_bukupinjam)
-    {
-        // Jika pengembalian tersebut tidak ada
-        if ($this->BukupinjamModel->where(['id_bukupinjam' => $id_bukupinjam, 'status_bukupinjam' => 1])->find() == null) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException();
-        } else {
-            $data['bukupinjam'] = $this->BukupinjamModel->where('id_bukupinjam', $id_bukupinjam)->join('user', 'user.nis = bukupinjam.nis_bukupinjam')->join('buku', 'buku.no_buku = bukupinjam.no_bukupinjam')->find()[0];
-
-            $html = view('print/v_print_pengembalian.php', $data);
-
-            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-            $pdf->SetCreator(PDF_CREATOR);
-            $pdf->SetAuthor('Andry Pebrianto');
-            $pdf->SetTitle('Cetak Laporan Pengembalian');
-            $pdf->SetSubject('Cetak Laporan Pengembalian');
-
-            $pdf->setPrintHeader(false);
-            $pdf->setPrintFooter(false);
-
-            $pdf->AddPage();
-
-            $pdf->writeHTML($html, true, false, true, false, '');
-            $this->response->setContentType('application/pdf');
-            $pdf->Output('laporan-pengembalian.pdf', 'I');
         }
     }
 }

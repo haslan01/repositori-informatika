@@ -39,10 +39,10 @@ $routes->add('logout', 'LoginController::logout', ['filter' => 'auth']);
 $routes->add('home', 'LibraryController::index', ['filter' => 'auth']);
 $routes->add('library', 'LibraryController::library', ['filter' => 'auth']);
 $routes->add('kategoriCepat/(:any)', 'LibraryController::kategoriCepat/$1', ['filter' => 'auth']);
-$routes->add('detailBuku/(:num)', 'LibraryController::detailBuku/$1', ['filter' => 'auth']);
-$routes->add('pinjamBuku/(:num)', 'LibraryController::pinjamBuku/$1', ['filter' => 'auth']);
-$routes->add('kembalikanBuku/(:num)', 'LibraryController::kembalikanBuku/$1', ['filter' => 'auth']);
-$routes->add('likeBuku/(:num)', 'LibraryController::likeBuku/$1', ['filter' => 'auth']);
+$routes->add('detailSkripsi/(:num)', 'LibraryController::detailSkripsi/$1', ['filter' => 'auth']);
+// $routes->add('pinjamBuku/(:num)', 'LibraryController::pinjamBuku/$1', ['filter' => 'auth']);
+// $routes->add('kembalikanBuku/(:num)', 'LibraryController::kembalikanBuku/$1', ['filter' => 'auth']);
+// $routes->add('likeBuku/(:num)', 'LibraryController::likeBuku/$1', ['filter' => 'auth']);
 
 // Routes controller AdminController
 $routes->add('admin', 'AdminController::index', ['filter' => 'auth']);
@@ -55,11 +55,11 @@ $routes->add('saveUpdateUser/(:num)', 'AdminController::saveUpdateUser/$1', ['fi
 $routes->add('deleteUser/(:num)', 'AdminController::deleteUser/$1', ['filter' => 'auth']);
 // Buku
 $routes->add('book', 'AdminController::book', ['filter' => 'auth']);
-$routes->add('addBuku', 'AdminController::addBuku', ['filter' => 'auth']);
-$routes->add('saveAddBuku', 'AdminController::saveAddBuku', ['filter' => 'auth']);
-$routes->add('updateBuku/(:num)', 'AdminController::updateBuku/$1', ['filter' => 'auth']);
-$routes->add('saveUpdateBuku/(:num)', 'AdminController::saveUpdateBuku/$1', ['filter' => 'auth']);
-$routes->add('deleteBuku/(:num)', 'AdminController::deleteBuku/$1', ['filter' => 'auth']);
+$routes->add('addSkripsi', 'AdminController::addSkripsi', ['filter' => 'auth']);
+$routes->add('saveAddSkripsi', 'AdminController::saveAddSkripsi', ['filter' => 'auth']);
+$routes->add('updateSkripsi/(:num)', 'AdminController::updateSkripsi/$1', ['filter' => 'auth']);
+$routes->add('saveUpdateSkripsi/(:num)', 'AdminController::saveUpdateSkripsi/$1', ['filter' => 'auth']);
+$routes->add('deleteSkripsi/(:num)', 'AdminController::deleteSkripsi/$1', ['filter' => 'auth']);
 // Kategori
 $routes->add('kategori', 'AdminController::kategori', ['filter' => 'auth']);
 $routes->add('addKategori', 'AdminController::addKategori', ['filter' => 'auth']);
@@ -68,11 +68,11 @@ $routes->add('updateKategori/(:num)', 'AdminController::updateKategori/$1', ['fi
 $routes->add('saveUpdateKategori/(:num)', 'AdminController::saveUpdateKategori/$1', ['filter' => 'auth']);
 $routes->add('deleteKategori/(:num)', 'AdminController::deleteKategori/$1', ['filter' => 'auth']);
 // Peminjaman dan Pengembalian
-$routes->add('peminjaman', 'AdminController::peminjaman', ['filter' => 'auth']);
-$routes->add('pengembalian', 'AdminController::pengembalian', ['filter' => 'auth']);
+// $routes->add('peminjaman', 'AdminController::peminjaman', ['filter' => 'auth']);
+// $routes->add('pengembalian', 'AdminController::pengembalian', ['filter' => 'auth']);
 // Cetak Laporan
-$routes->add('cetakLaporanPeminjaman/(:num)', 'AdminController::cetakLaporanPeminjaman/$1', ['filter' => 'auth']);
-$routes->add('cetakLaporanPengembalian/(:num)', 'AdminController::cetakLaporanPengembalian/$1', ['filter' => 'auth']);
+// $routes->add('cetakLaporanPeminjaman/(:num)', 'AdminController::cetakLaporanPeminjaman/$1', ['filter' => 'auth']);
+// $routes->add('cetakLaporanPengembalian/(:num)', 'AdminController::cetakLaporanPengembalian/$1', ['filter' => 'auth']);
 
 // Routes controller UserController
 $routes->add('profile', 'UserController::index', ['filter' => 'auth']);

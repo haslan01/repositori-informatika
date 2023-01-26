@@ -41,11 +41,11 @@
                                         <h5 class="card-title">
                                             <b>
                                                 <i class="mdi mdi-account"></i>
-                                                Data Mahasiswa</b>
+                                                Data User</b>
                                         </h5>
                                         <hr>
                                         <p class="card-text"><?= $jumlah['siswa'] ?>
-                                            Mahasiswa terdaftar</p>
+                                            User terdaftar</p>
                                         <!-- <a class="btn btn-primary" href="<?= base_url('user') ?>">Atur</a> -->
                                     </div>
                                 </div>
@@ -59,8 +59,8 @@
                                                 Data Skripsi</b>
                                         </h5>
                                         <hr>
-                                        <p class="card-text"><?= $jumlah['buku'] ?>
-                                            Buku ditemukan</p>
+                                        <p class="card-text"><?= $jumlah['skripsi'] ?>
+                                            Skripsi ditemukan</p>
                                         <!-- <a class="btn btn-primary" href="<?= base_url('book') ?>">Atur</a> -->
                                     </div>
                                 </div>
@@ -80,36 +80,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col mb-4">
-                                <div class="">
-                                    <div class="">
-                                        <h5 class="card-title">
-                                            <b>
-                                                <i class="mdi mdi-book-plus"></i>
-                                                Data Peminjaman</b>
-                                        </h5>
-                                        <hr>
-                                        <p class="card-text"><?= $jumlah['peminjaman'] ?>
-                                            Peminjaman ditemukan</p>
-                                        <a class="btn btn-primary" href="<?= base_url('peminjaman') ?>">Atur</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col mb-4">
-                                <div class="">
-                                    <div class="">
-                                        <h5 class="card-title">
-                                            <b>
-                                                <i class="mdi mdi-book-minus"></i>
-                                                Data Pengembalian</b>
-                                        </h5>
-                                        <hr>
-                                        <p class="card-text"><?= $jumlah['pengembalian'] ?>
-                                            Pengembalian ditemukan</p>
-                                        <a class="btn btn-primary" href="<?= base_url('pengembalian') ?>">Atur</a>
-                                    </div>
-                                </div>
-                            </div> -->
+                           
                         </div>
                     </div>
                 </div>

@@ -159,7 +159,7 @@
                                     href="<?= base_url('user') ?>"
                                     aria-expanded="false">
                                     <i class="mdi mdi-account"></i>
-                                    <span class="hide-menu">Data Mahasiswa</span></a>
+                                    <span class="hide-menu">Data User</span></a>
                             </li>
                             <li>
                                 <a

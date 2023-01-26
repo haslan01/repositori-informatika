@@ -44,7 +44,7 @@
                       <!-- <img src="assets/images/blog-post-01.jpg" alt=""> -->
                     </div>
                     <div class="down-content">
-                    <?php if ($new_buku == null) { ?>
+                    <?php if ($new_skripsi == null) { ?>
                         <div class="card-body">
                             <h3 style="display: inline;">
                                 Tidak ditemukan.
@@ -53,24 +53,24 @@
                     <?php } else { ?>
                     <div class="blog-thumb">
                       <!-- <img src="assets/images/blog-post-01.jpg" alt=""> -->
-                    </div>
-                      <span><?= $nbuku['nama_kategori'] ?></span>
-                      <?php foreach ($new_buku as $nbuku) { ?>
-                      <a href="<?= base_url('detailBuku/' . $nbuku['no_buku']) ?>"><h4><b title="<?= $nbuku['nama_buku'] ?>"><?= substr($nbuku['nama_buku'], 0, 100) ?><?php if (strlen($nbuku['nama_buku']) > 100) { ?>...<?php } ?></b></h4></a>
+                    </div>                      
+                      <?php foreach ($new_skripsi as $nskripsi) { ?>
+                      <span><?= $nskripsi['nama_kategori'] ?></span>
+                      <a href="<?= base_url('detailSkripsi/' . $nskripsi['no_skripsi']) ?>"><h4><b title="<?= $nskripsi['nama_skripsi'] ?>"><?= substr($nskripsi['nama_skripsi'], 0, 100) ?><?php if (strlen($nskripsi['nama_skripsi']) > 100) { ?>...<?php } ?></b></h4></a>
                       <ul class="post-info">
-                        <li><a href="#"><?= $nbuku['buku-created_at'] ?></a></li>
+                        <li><a href="#"><?= $nskripsi['skripsi-created_at'] ?></a></li>
                       </ul>
                       <div class="post-options">
                         <div class="row">
                           <div class="col-6">
                             <ul class="post-tags">
                               <li><i class="fa fa-tags"></i></li>
-                              <li><a href="<?= base_url('detailBuku/' . $nbuku['no_buku']) ?>">Lihat Detail</a></li>
+                              <li><a href="<?= base_url('detailSkripsi/' . $nskripsi['no_skripsi']) ?>">Lihat Detail</a></li>
                             </ul>
                           </div>
                         </div>
                       </div>
-                      <p><?= substr($nbuku['deskripsi_buku'], 0, 150) ?><?php if (strlen($nbuku['deskripsi_buku']) > 160) { ?>...<?php } ?></p>
+                      <p><?= substr($nskripsi['deskripsi_skripsi'], 0, 150) ?><?php if (strlen($nskripsi['deskripsi_skripsi']) > 160) { ?>...<?php } ?></p>
                       
                       <br>
                       <?php } ?>

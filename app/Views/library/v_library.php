@@ -45,38 +45,38 @@
                       <!-- <img src="assets/images/blog-post-01.jpg" alt=""> -->
                     </div>
                     <div class="down-content">
-                    <?php if ($all_buku == null) { ?>
+                    <?php if ($all_skripsi == null) { ?>
                         <div class="card mt-4">
                             <div class="card-body">
                                 <h3 style="display: inline;">
-                                    Tidak ada buku.
+                                    Tidak ada skripsi.
                                 </h3>
                             </div>
                         </div>
                     <?php } else { ?>
-                        <?php foreach ($all_buku as $buku) { ?>
-                        <span><?= $buku['nama_kategori'] ?></span>
-                        <a href="<?= base_url('detailBuku/' . $buku['no_buku']) ?>"><h4><b title="<?= $buku['nama_buku'] ?>"><?= substr($buku['nama_buku'], 0, 100) ?><?php if (strlen($buku['nama_buku']) > 100) { ?>...<?php } ?></b></h4></a>
+                        <?php foreach ($all_skripsi as $skripsi) { ?>
+                        <span><?= $skripsi['nama_kategori'] ?></span>
+                        <a href="<?= base_url('detailSkripsi/' . $skripsi['no_skripsi']) ?>"><h4><b title="<?= $skripsi['nama_skripsi'] ?>"><?= substr($skripsi['nama_skripsi'], 0, 100) ?><?php if (strlen($skripsi['nama_skripsi']) > 100) { ?>...<?php } ?></b></h4></a>
                       <ul class="post-info">
-                        <li><a href="#"><?= $buku['buku-created_at'] ?></a></li>
+                        <li><a href="#"><?= $skripsi['skripsi-created_at'] ?></a></li>
                       </ul>
                       <div class="post-options">
                         <div class="row">
                           <div class="col-6">
                             <ul class="post-tags">
                               <li><i class="fa fa-tags"></i></li>
-                              <li><a href="<?= base_url('detailBuku/' . $buku['no_buku']) ?>">Lihat Detail</a></li>
+                              <li><a href="<?= base_url('detailSkripsi/' . $skripsi['no_skripsi']) ?>">Lihat Detail</a></li>
                             </ul>
                           </div>
                         </div>
                       </div>
-                      <p><?= substr($buku['deskripsi_buku'], 0, 150) ?><?php if (strlen($buku['deskripsi_buku']) > 150) { ?>...<?php } ?></p>
+                      <p><?= substr($skripsi['deskripsi_skripsi'], 0, 150) ?><?php if (strlen($skripsi['deskripsi_skripsi']) > 150) { ?>...<?php } ?></p>
                       
                       <br>
                       <?php } ?>
                     </div>
                   </div>
-                  <?= $pager->links('buku', 'custom_pagination') ?>
+                  <?= $pager->links('skripsi', 'custom_pagination') ?>
                   <?php } ?>
                 </div>
                 
